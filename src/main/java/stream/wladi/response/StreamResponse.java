@@ -17,7 +17,6 @@ public class StreamResponse {
     public void setResults(ArrayList<Results> results) {
         this.results = results;
     }
-
     
     @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
     public static class Results {
@@ -25,6 +24,24 @@ public class StreamResponse {
         private String title;
         private String overview;
         private Double popularity;
+        private String id;
+        private String key;
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
 
         @JsonProperty("poster_path")
         private String posterPath;

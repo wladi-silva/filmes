@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filmes</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #141414;
             color: #fff;
+        }
+
+        .container-header {
+            text-align: center;
+            padding: 5rem;
         }
 
         .movie-preview {
@@ -28,13 +34,13 @@
 
         .movie-video {
             text-align: center;
-            max-width: 800px; 
+            max-width: 1280px; 
             margin: 0 auto; 
         }
 
         .movie-video iframe {
             width: 100%;
-            height: auto;
+            height: 420px;
             outline: none;
         }
 
@@ -79,17 +85,22 @@
             color: #c00;
             cursor: pointer;
         }
+
+        .none {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="movie-preview">
+    <div id="movie-container" class="movie-preview none">
         <div class="movie-header">
             <h1 id="movie-title">Título do Filme</h1>
             <p id="movie-description">Descrição do Filme</p>
         </div>
         <div class="movie-video">
-            <iframe id="movie-player" type="text/html" width="720" height="405" src="" frameborder="0" allowfullscreen></iframe>
+            <iframe id="movie-player" type="text/html" src="" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 
@@ -99,16 +110,27 @@
                 <div class="movie-thumbnail">
                     <img th:src="@{${'https://image.tmdb.org/t/p/w500' + movies.posterPath}}" width="120">
                 </div>
-                <a href="#" th:attr="onclick=|loadMovie('${movies.title}', '${movies.overview}', 'https://www.youtube.com/embed/saW6CjWI9W4')|" th:text="${movies.title}"></a>
+                <a th:attr="onclick=|loadMovie('${movies.title}', '${movies.overview}', '${movies.id}')|" th:text="${movies.title}"></a>
             </li>
         </ul>
     </div>
 
     <script>
-        function loadMovie(title, description, videoUrl) {
-            document.getElementById("movie-title").innerText = title;
-            document.getElementById("movie-description").innerText = description;
-            document.getElementById("movie-player").src = videoUrl;
+        function loadMovie(title, description, id) {
+            fetch('http://localhost:7000/' + id)
+                .then(response => response.json())
+                .then(data => {
+                var resultLength = data.results.length - 1;
+                var object = data.results[resultLength].key;
+                document.getElementById("movie-container").className = "movie-preview"
+                document.getElementById("movie-title").innerText = title;
+                document.getElementById("movie-description").innerText = description;
+                document.getElementById("movie-player").src = "https://www.youtube.com/embed/" + object;
+                window.scrollTo(0, 0);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
         }
     </script>
 </body> 
