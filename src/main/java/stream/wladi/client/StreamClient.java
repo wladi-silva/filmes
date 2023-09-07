@@ -14,7 +14,7 @@ import stream.wladi.response.StreamResponse;
 public class StreamClient {
     
     private final String URL = "https://api.themoviedb.org/3/movie/";
-    private final String TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYTM5MTgzY2I3ZDdlNjRhNTU0ODVhMjI3Y2RmNWQ3ZiIsInN1YiI6IjY0Yzg0ZGU1MWZhMWM4MDBlZWFlMzllMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8SqnpIPXiIQISc10Ym4bgAtuPDMlLxD0rAo2LeBhOOc";
+    private final String TOKEN = "";
 
     private final RestTemplate restTemplate;
 
