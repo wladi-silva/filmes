@@ -1,5 +1,5 @@
 # Filmes
-Listagem dos filmes em alta utilizando API do The Movie Database 
+Listagem dos filmes em alta utilizando API do The Movie Database com Spring Boot
 
 ![Tela Inicial](src/main/resources/static/assets/home.png)
 
